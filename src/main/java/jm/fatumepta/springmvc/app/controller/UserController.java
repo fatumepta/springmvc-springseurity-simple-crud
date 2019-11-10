@@ -1,11 +1,11 @@
 package jm.fatumepta.springmvc.app.controller;
 
+import jm.fatumepta.springmvc.app.model.User;
 import jm.fatumepta.springmvc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -17,23 +17,28 @@ public class UserController {
         this.userService = userService;
     }
 
-    // show all users
     @GetMapping("/")
-    public String showListOfUsers(Model model) {
+    public String showUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "list-of-users";
     }
 
-    // show user form (add/edit)
-    @GetMapping("/user-form")
-    public String showUserForm() {
+    @GetMapping("/showUserForm")
+    public String showUserForm(Model model) {
+        model.addAttribute("user", new User());
         return "user-form";
     }
 
-    // send form with user data
-    @PostMapping("/user-form")
-    public String processUserForm() {
-        return "list-of-users";
+    @GetMapping("/edit/{id}")
+    public String editUser(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        return "user-form";
+    }
+
+    @PostMapping("/saveOrUpdateUser")
+    public String saveOrUpdateUser(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
+        return "redirect:/";
     }
 
 }

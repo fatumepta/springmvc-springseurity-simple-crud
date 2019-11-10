@@ -19,35 +19,34 @@
 
 <body>
 
-<%@include file="navigation.jsp"%>
-<hr>
+    <%@include file="navigation.jsp"%>
+    <hr>
 
-<fieldset>
-    <table width="400" border="1" cellpadding="4" cellspacing="0">
-        <legend><h1><b> List of users </b></h1></legend>
-        <tr bgcolor="#a9a9a9">
-            <th> id </th>
-            <th> name </th>
-            <th> login </th>
-            <th> role </th>
-            <th> options </th>
-        </tr>
-        <%-- pass through all users --%>
-        <c:forEach var="user" items="${users}">
-            <tr>
-                <th> ${user.id} </th>
-                <th> ${user.name} </th>
-                <th> ${user.login} </th>
-                <th> ${user.role} </th>
-                <th>
-                    <a href="/edit/${user.id}"> edit </a>
-                    <a href="/delete/${user.id}"> delete </a>
-                </th>
+    <fieldset>
+        <table width="400" border="1" cellpadding="4" cellspacing="0">
+            <legend><h1><b> List of users </b></h1></legend>
+            <tr bgcolor="#a9a9a9">
+                <th> id </th>
+                <th> name </th>
+                <th> login </th>
+                <th> role </th>
+                <th> options </th>
             </tr>
-        </c:forEach>
-
-    </table>
-</fieldset>
+            <%-- pass through all users --%>
+            <c:forEach var="user" items="${users}">
+                <tr>
+                    <th> ${user.id} </th>
+                    <th> ${user.name} </th>
+                    <th> ${user.login} </th>
+                    <th> ${user.role} </th>
+                    <th>
+                        <a href="/edit/${user.id}"> edit </a>
+                        <a href="/delete/${user.id}"> delete </a>
+                    </th>
+                </tr>
+            </c:forEach>
+        </table>
+    </fieldset>
 </body>
 
 </html>
