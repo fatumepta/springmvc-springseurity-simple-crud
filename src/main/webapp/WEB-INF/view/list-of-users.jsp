@@ -41,7 +41,8 @@
                     <th> ${user.role} </th>
                     <th>
                         <a href="/edit/${user.id}"> edit </a>
-                        <a href="/delete/${user.id}"> delete </a>
+                        <a href="/delete/${user.id}"
+                           onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false"> delete </a>
                     </th>
                 </tr>
             </c:forEach>

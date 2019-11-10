@@ -39,6 +39,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void deleteUser(User user) {
-
+        sessionFactory.getCurrentSession().delete(user);
     }
 }
