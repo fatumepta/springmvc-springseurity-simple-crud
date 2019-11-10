@@ -17,7 +17,7 @@ public class AppSpringMvcDispatcherServletInitializer extends AbstractAnnotation
     // contextConfigLocation (from applicationContext.xml)
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{WebConfig.class};
+        return new Class[]{WebMvcConfig.class};
     }
 
     // dispatcher servlet url-pattern (from applicationContext.xml)

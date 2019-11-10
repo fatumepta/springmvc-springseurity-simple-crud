@@ -5,13 +5,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
 @EnableWebMvc
 @Configuration
 @ComponentScan("jm.fatumepta.springmvc.app")
-public class WebConfig {
+public class WebMvcConfig implements WebMvcConfigurer {
 
     @Bean
     public ViewResolver viewResolver() {
@@ -21,5 +22,4 @@ public class WebConfig {
 
         return viewResolver;
     }
-
 }
