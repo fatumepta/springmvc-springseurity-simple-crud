@@ -15,6 +15,10 @@
         input {
             float: right;
         }
+
+        .required {
+            color: crimson;
+        }
     </style>
 </head>
 
@@ -25,11 +29,13 @@
 
     <form:form action="/saveOrUpdateUser" modelAttribute="user" method="post">
         <fieldset>
-            <legend><h2><b> ADD or EDIT </b></h2></legend>
+            <legend><h2><b> User form </b></h2></legend>
             <form:hidden path="id"/>
             name: <form:input path="name" />
-            <p>login: <form:input path="login" />
-            <p>password: <form:password path="password"/>
+            <p>login (*): <form:input path="login" />
+                <form:errors path="login" cssClass="required"/>
+            <p>password (*): <form:password path="password"/>
+                <form:errors path="password" cssClass="required"/>
             <p>role:
                 <form:select path="role">
                     <form:option value="user" label="user"/>

@@ -3,9 +3,14 @@ package jm.fatumepta.springmvc.app.controller;
 import jm.fatumepta.springmvc.app.model.User;
 import jm.fatumepta.springmvc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -15,6 +20,12 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
     @GetMapping("/")
@@ -42,9 +53,13 @@ public class UserController {
     }
 
     @PostMapping("/saveOrUpdateUser")
-    public String saveOrUpdateUser(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
-        return "redirect:/";
+    public String saveOrUpdateUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "user-form";
+        } else {
+            userService.saveUser(user);
+            return "redirect:/";
+        }
     }
 
 }

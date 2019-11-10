@@ -1,6 +1,7 @@
 package jm.fatumepta.springmvc.app.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -15,9 +16,11 @@ public class User {
     @Column(name = "name")
     private String name;
 
+    @NotNull(message = "login required!")
     @Column(name = "login")
     private String login;
 
+    @NotNull(message = "password required!")
     @Column(name = "password")
     private String password;
 
