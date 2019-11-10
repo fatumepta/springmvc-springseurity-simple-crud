@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @Configuration
 @ComponentScan("jm.fatumepta.springmvc.app")
-public class AppConfig {
+public class WebConfig {
 
     @Bean
     public ViewResolver viewResolver() {

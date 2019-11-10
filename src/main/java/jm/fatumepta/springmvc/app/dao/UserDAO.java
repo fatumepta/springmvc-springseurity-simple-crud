@@ -6,9 +6,9 @@ import java.util.List;
 
 
 public interface UserDAO {
-    void createUser(User user);
+    void saveUser(User user);
 
-    User getUser(User user);
+    User getUserById(long id);
 
     List<User> getAllUsers();
 

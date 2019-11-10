@@ -1,6 +1,6 @@
 package jm.fatumepta.springmvc.app.controller;
 
-import jm.fatumepta.springmvc.app.service.UserServiceImpl;
+import jm.fatumepta.springmvc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,16 +10,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    public UserController(UserServiceImpl userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     // show all users
     @GetMapping("/")
     public String showListOfUsers(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
         return "list-of-users";
     }
 

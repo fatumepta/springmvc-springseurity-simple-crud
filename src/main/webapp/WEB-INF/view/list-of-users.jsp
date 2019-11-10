@@ -8,6 +8,9 @@
 
 <body>
     <h2> List of Users </h2>
+    <c:forEach var="user" items="${users}">
+        <h2>${user}</h2><br>
+    </c:forEach>
 </body>
 
 </html>

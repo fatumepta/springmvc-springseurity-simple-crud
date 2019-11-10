@@ -5,10 +5,10 @@ import jm.fatumepta.springmvc.app.model.User;
 import java.util.List;
 
 
-public interface UserServiceInterface {
-    void createUser(User user);
+public interface UserService {
+    void saveUser(User user);
 
-    User getUser(User user);
+    User getUserById(long id);
 
     List<User> getAllUsers();
 

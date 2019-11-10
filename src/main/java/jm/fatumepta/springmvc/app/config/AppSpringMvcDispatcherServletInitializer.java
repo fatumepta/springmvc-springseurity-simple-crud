@@ -1,6 +1,9 @@
 package jm.fatumepta.springmvc.app.config;
 
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 
 public class AppSpringMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -8,13 +11,13 @@ public class AppSpringMvcDispatcherServletInitializer extends AbstractAnnotation
     // don't understand wtf is this!
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[]{HibernateConfig.class};
     }
 
     // contextConfigLocation (from applicationContext.xml)
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{AppConfig.class};
+        return new Class[]{WebConfig.class};
     }
 
     // dispatcher servlet url-pattern (from applicationContext.xml)
@@ -23,4 +26,10 @@ public class AppSpringMvcDispatcherServletInitializer extends AbstractAnnotation
         return new String[]{"/"};
     }
 
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("UTF-8");
+        encodingFilter.setForceEncoding(true);
+        return new Filter[]{encodingFilter};
+    }
 }
