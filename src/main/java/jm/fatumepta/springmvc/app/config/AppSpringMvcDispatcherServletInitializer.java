@@ -11,13 +11,13 @@ public class AppSpringMvcDispatcherServletInitializer extends AbstractAnnotation
     // don't understand wtf is this!
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{HibernateConfig.class};
+        return new Class[]{HibernateConfig.class, WebSecurityConfig.class};
     }
 
     // contextConfigLocation (from applicationContext.xml)
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{WebMvcConfig.class};
+        return new Class[]{MvcConfig.class};
     }
 
     // dispatcher servlet url-pattern (from applicationContext.xml)

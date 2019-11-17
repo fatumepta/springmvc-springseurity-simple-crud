@@ -1,8 +1,10 @@
 package jm.fatumepta.springmvc.app.dao;
 
 import jm.fatumepta.springmvc.app.model.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,4 +43,14 @@ public class UserDAOImpl implements UserDAO {
     public void deleteUser(User user) {
         sessionFactory.getCurrentSession().delete(user);
     }
+
+    @Override
+    public User getUserByLogin(String login) throws IndexOutOfBoundsException {
+        return (User) sessionFactory.getCurrentSession()
+                .createQuery("FROM User WHERE login=:login")
+                .setParameter("login", login)
+                .getResultList()
+                .get(0);
+    }
+
 }

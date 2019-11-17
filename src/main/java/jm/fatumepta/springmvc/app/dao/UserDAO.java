@@ -10,6 +10,8 @@ public interface UserDAO {
 
     User getUserById(long id);
 
+    User getUserByLogin(String login);
+
     List<User> getAllUsers();
 
     void editUser(User user);

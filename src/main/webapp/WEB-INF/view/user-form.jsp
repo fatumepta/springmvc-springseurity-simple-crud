@@ -27,7 +27,7 @@
     <%@include file="navigation.jsp"%>
     <hr>
 
-    <form:form action="/saveOrUpdateUser" modelAttribute="user" method="post">
+    <form:form action="/admin/saveOrUpdateUser" modelAttribute="user" method="post">
         <fieldset>
             <legend><h2><b> User form </b></h2></legend>
             <form:hidden path="id"/>

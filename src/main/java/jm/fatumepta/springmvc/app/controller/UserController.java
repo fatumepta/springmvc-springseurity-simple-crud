@@ -28,37 +28,42 @@ public class UserController {
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-    @GetMapping("/")
+    @GetMapping({"/", "/home"})
+    public String showHomePage(Model model) {
+        return "home";
+    }
+
+    @GetMapping("/admin/users")
     public String showUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "list-of-users";
     }
 
-    @GetMapping("/showUserForm")
+    @GetMapping("/admin/showUserForm")
     public String showUserForm(Model model) {
         model.addAttribute("user", new User());
         return "user-form";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String editUser(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user-form";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(userService.getUserById(id));
-        return "redirect:/";
+        return "redirect:/admin/users";
     }
 
-    @PostMapping("/saveOrUpdateUser")
+    @PostMapping("/admin/saveOrUpdateUser")
     public String saveOrUpdateUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "user-form";
         } else {
             userService.saveUser(user);
-            return "redirect:/";
+            return "redirect:/admin/users";
         }
     }
 
