@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title> List of users </title>
+    <title> admin [${user.login}] page </title>
     <style>
         fieldset {
             width: 300px;
@@ -24,29 +24,21 @@
 
     <fieldset>
         <table width="400" border="1" cellpadding="4" cellspacing="0">
-            <legend><h1><b> List of users </b></h1></legend>
+            <legend><h1><b> <a href="<c:url value="/logout" />">Logout</a> </b></h1></legend>
             <tr bgcolor="#a9a9a9">
                 <th> id </th>
                 <th> name </th>
                 <th> login </th>
                 <th> role </th>
-                <th> options </th>
             </tr>
-            <%-- pass through all users --%>
-            <c:forEach var="user" items="${users}">
-                <tr>
-                    <th> ${user.id} </th>
-                    <th> ${user.name} </th>
-                    <th> ${user.login} </th>
-                    <th> ${user.role} </th>
-                    <th>
-                        <a href="/admin/edit/${user.id}"> edit </a>
-                        <a href="/admin/delete/${user.id}"
-                           onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false"> delete </a>
-                    </th>
-                </tr>
-            </c:forEach>
+            <tr>
+                <th> ${user.id} </th>
+                <th> ${user.name} </th>
+                <th> ${user.login} </th>
+                <th> ${user.role} </th>
+            </tr>
         </table>
+
     </fieldset>
 </body>
 

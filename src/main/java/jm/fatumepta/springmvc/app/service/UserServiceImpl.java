@@ -52,9 +52,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public User getUserByLogin(String login) {
+        return dao.getUserByLogin(login);
+    }
+
+    @Override
+    @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         try {
-            User user = dao.getUserByLogin(login);
+            User user = getUserByLogin(login);
             return toUserDetails(user);
         } catch (IndexOutOfBoundsException exc) {
             throw new UsernameNotFoundException("No such user in database!");

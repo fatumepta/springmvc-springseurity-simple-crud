@@ -29,8 +29,11 @@ public class UserController {
     }
 
     @GetMapping({"/", "/home"})
-    public String showHomePage(Model model) {
-        return "home";
+    public String showHomePage(@SessionAttribute("login") String login, Model model) {
+        User user = userService.getUserByLogin(login);
+        model.addAttribute("user", user);
+
+        return user.getRole().toLowerCase().equals("admin") ? "admin-home" : "user-home";
     }
 
     @GetMapping("/admin/users")
